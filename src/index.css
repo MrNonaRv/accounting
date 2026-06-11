@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  --font-serif: "Georgia", Cambria, ui-serif, serif;
+  --color-brand-navy: #002147;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
+/* Printing standard rules supporting official local audits */
+@media print {
+  body {
+    background-color: white !important;
+    color: black !important;
+  }
+  aside, header, select, button, .print\:hidden {
+    display: none !important;
+  }
+  main {
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+  .pl-80 {
+    padding-left: 0 !important;
+  }
+  #print-area {
+    overflow: visible !important;
+    max-height: none !important;
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Mambusao LGU Accounting System",
+  "description": "PPSAS-compliant financial reporting, budget monitoring, and accounting system for the Municipality of Mambusao, Capiz, Philippines.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
