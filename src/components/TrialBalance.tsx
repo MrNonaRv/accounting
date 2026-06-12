@@ -57,12 +57,12 @@ export default function TrialBalance({ currentFund }: TrialBalanceProps) {
       {/* Header filter layout */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
         <div>
-          <h3 className="text-lg font-bold text-slate-900 tracking-tight">Post-Audit Trial Balance</h3>
-          <p className="text-xs text-slate-500 font-medium font-sans">Dynamic ledger balances verifying the algebraic equality of total debit and credit postings</p>
+          <h3 className="text-2xl font-bold font-serif tracking-tight text-brand-navy">Post-Audit Trial Balance</h3>
+          <p className="text-xs text-slate-500 font-semibold font-sans">Dynamic ledger balances verifying the algebraic equality of total debit and credit postings</p>
         </div>
 
         {/* Date parameters */}
-        <div className="flex flex-wrap items-center gap-3 bg-white border border-slate-200 px-3 py-2 rounded-lg shadow-xs text-xs font-sans">
+        <div className="flex flex-wrap items-center gap-3 bg-white border border-slate-200 px-3 py-2 rounded shadow-xs text-xs font-sans">
           <Calendar className="w-4 h-4 text-slate-450" />
           <div className="flex items-center gap-2">
             <span className="font-semibold text-slate-500">Year:</span>
@@ -70,7 +70,7 @@ export default function TrialBalance({ currentFund }: TrialBalanceProps) {
               id="trial-year"
               value={selectedYear}
               onChange={(e) => setSelectedYear(e.target.value)}
-              className="bg-slate-50 border border-slate-100 rounded px-2.1 py-1 font-bold text-slate-700 cursor-pointer outline-none focus:border-blue-500"
+              className="bg-slate-50 border border-slate-100 rounded px-2.1 py-1 font-bold text-slate-700 cursor-pointer outline-none focus:border-brand-navy"
             >
               <option value="2020">FY 2020</option>
               <option value="2019">FY 2019</option>
@@ -87,7 +87,7 @@ export default function TrialBalance({ currentFund }: TrialBalanceProps) {
               id="trial-month"
               value={selectedMonth}
               onChange={(e) => setSelectedMonth(e.target.value)}
-              className="bg-slate-50 border border-slate-100 rounded px-2.1 py-1 font-bold text-slate-700 cursor-pointer outline-none focus:border-blue-500"
+              className="bg-slate-50 border border-slate-100 rounded px-2.1 py-1 font-bold text-slate-700 cursor-pointer outline-none focus:border-brand-navy"
             >
               <option value="">Full Year (Jan-Dec)</option>
               <option value="01">January</option>
@@ -108,34 +108,34 @@ export default function TrialBalance({ currentFund }: TrialBalanceProps) {
       </div>
 
       {/* Audit state Banner */}
-      <div className={`p-4 rounded-xl flex items-center justify-between gap-4 border text-xs ${
-        isBalanced ? 'bg-emerald-50 border-emerald-250 text-emerald-800' : 'bg-red-50 border-red-250 text-red-800'
+      <div className={`p-4 rounded flex items-center justify-between gap-4 border text-xs ${
+        isBalanced ? 'bg-slate-55 border border-slate-200 text-slate-800' : 'bg-red-50 border-red-250 text-red-800'
       }`}>
         <div className="flex items-center gap-3">
           {isBalanced ? (
-            <ShieldCheck className="w-5 h-5 text-emerald-600 shrink-0" />
+            <ShieldCheck className="w-5 h-5 text-brand-navy shrink-0" />
           ) : (
             <AlertCircle className="w-5 h-5 text-red-600 shrink-0" />
           )}
           <div>
-            <p className="font-bold">
+            <p className="font-bold font-serif text-sm text-brand-navy">
               {isBalanced ? 'Trial Balance Ledger Mathematically Confirmed' : 'Trial balance mismatch notice'}
             </p>
-            <p className={`mt-0.5 font-medium ${isBalanced ? 'text-emerald-650' : 'text-red-650'}`}>
-              Cumulative DR: <strong className="font-mono">{formatPHP(totalDebitSum)}</strong> &bull; Cumulative CR: <strong className="font-mono">{formatPHP(totalCreditSum)}</strong>
+            <p className={`mt-0.5 font-semibold ${isBalanced ? 'text-slate-650' : 'text-red-650'}`}>
+              Cumulative DR: <strong className="font-mono text-brand-navy">{formatPHP(totalDebitSum)}</strong> &bull; Cumulative CR: <strong className="font-mono text-brand-navy">{formatPHP(totalCreditSum)}</strong>
             </p>
           </div>
         </div>
-        <span className="hidden sm:inline-flex text-[9px] font-mono font-bold uppercase tracking-wider bg-white px-2 py-1 border border-slate-100 rounded">
+        <span className="hidden sm:inline-flex text-[9px] font-mono font-bold uppercase tracking-wider bg-white px-2 py-1 border border-slate-200 rounded text-brand-navy font-bold">
           {isBalanced ? 'Matched (0.00 offset)' : 'Correction Pending'}
         </span>
       </div>
 
       {/* Trial Sheets render */}
-      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs">
+      <div className="bg-white border border-slate-200 rounded overflow-hidden shadow-xs">
         {loading ? (
           <div className="py-24 flex flex-col items-center justify-center gap-3">
-            <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-8 h-8 border-3 border-brand-navy border-t-transparent rounded-full animate-spin"></div>
             <p className="text-xs text-slate-400 font-mono font-bold">Summing trial equations...</p>
           </div>
         ) : accounts.length === 0 ? (
@@ -148,7 +148,7 @@ export default function TrialBalance({ currentFund }: TrialBalanceProps) {
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs font-sans">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold font-mono text-[10px] uppercase tracking-wider">
+                <tr className="bg-slate-50 border-b border-slate-200 text-brand-navy font-bold font-mono text-[10px] uppercase tracking-wider">
                   <th className="py-3.5 px-6 w-32">Account Code</th>
                   <th className="py-3.5 px-6">Account Title</th>
                   <th className="py-3.5 px-6 w-36">Nature Classification</th>
@@ -157,22 +157,22 @@ export default function TrialBalance({ currentFund }: TrialBalanceProps) {
                   <th className="py-3.5 px-6 text-right w-40">Calculated Balance</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 font-medium">
+              <tbody className="divide-y divide-slate-150 font-medium">
                 
                 {/* 1. BALANCE SHEET GROUP */}
                 {balanceSheetAccounts.length > 0 && (
                   <>
                     <tr className="bg-slate-100/60 font-bold border-y border-slate-200">
-                      <td colSpan={6} className="py-2.5 px-6 text-[10px] font-mono tracking-widest text-slate-500 uppercase">
+                      <td colSpan={6} className="py-2.5 px-6 text-[10px] font-mono tracking-widest text-[#002147] uppercase font-bold text-brand-navy">
                         Section A: Balance Sheet Accounts (PPSAS Core)
                       </td>
                     </tr>
                     {balanceSheetAccounts.map((a: any) => (
                       <tr key={a.AC_Code} className="hover:bg-slate-50/50 transition-colors">
                         <td className="py-3.5 px-6 font-mono text-slate-900 font-extrabold">{a.AC_Code}</td>
-                        <td className="py-3.5 px-6 font-semibold text-slate-800">{a.Title}</td>
-                        <td className="py-3.5 px-6 text-slate-500 text-[11px] font-medium leading-none">
-                          {a.BalanceSheetCategory} &bull; <span className="font-mono text-[9px] uppercase font-bold">{a.Nature}</span>
+                        <td className="py-3.5 px-6 font-bold text-slate-800">{a.Title}</td>
+                        <td className="py-3.5 px-6 text-slate-500 text-[11px] font-semibold leading-none">
+                          {a.BalanceSheetCategory} &bull; <span className="font-mono text-[9px] uppercase font-bold text-brand-navy">{a.Nature}</span>
                         </td>
                         <td className="py-3.5 px-6 text-right font-mono text-slate-650">
                           {a.TotalDebit > 0 ? formatPHP(a.TotalDebit) : '-'}
@@ -192,16 +192,16 @@ export default function TrialBalance({ currentFund }: TrialBalanceProps) {
                 {incomeStatementAccounts.length > 0 && (
                   <>
                     <tr className="bg-slate-100/60 font-bold border-y border-slate-200">
-                      <td colSpan={6} className="py-2.5 px-6 text-[10px] font-mono tracking-widest text-slate-500 uppercase">
+                      <td colSpan={6} className="py-2.5 px-6 text-[10px] font-mono tracking-widest text-[#002147] uppercase font-bold text-brand-navy">
                         Section B: Income Statement Accounts (Performance)
                       </td>
                     </tr>
                     {incomeStatementAccounts.map((a: any) => (
                       <tr key={a.AC_Code} className="hover:bg-slate-50/50 transition-colors">
                         <td className="py-3.5 px-6 font-mono text-slate-900 font-extrabold">{a.AC_Code}</td>
-                        <td className="py-3.5 px-6 font-semibold text-slate-800">{a.Title}</td>
-                        <td className="py-3.5 px-6 text-slate-500 text-[11px] font-medium leading-none">
-                          {a.IncomeStatementCategory} &bull; <span className="font-mono text-[9px] uppercase font-bold">{a.Nature}</span>
+                        <td className="py-3.5 px-6 font-bold text-slate-800">{a.Title}</td>
+                        <td className="py-3.5 px-6 text-slate-500 text-[11px] font-semibold leading-none">
+                          {a.IncomeStatementCategory} &bull; <span className="font-mono text-[9px] uppercase font-bold text-brand-navy">{a.Nature}</span>
                         </td>
                         <td className="py-3.5 px-6 text-right font-mono text-slate-655">
                           {a.TotalDebit > 0 ? formatPHP(a.TotalDebit) : '-'}
@@ -218,17 +218,17 @@ export default function TrialBalance({ currentFund }: TrialBalanceProps) {
                 )}
 
                 {/* Total algebra double verification matching */}
-                <tr className="bg-slate-100 font-bold text-slate-900 border-t-2 border-slate-350 text-[13px]">
-                  <td colSpan={3} className="py-4 px-6 text-right text-[10px] uppercase font-mono tracking-wider text-slate-600">
+                <tr className="bg-slate-100 font-extrabold text-slate-900 border-t-2 border-slate-350 text-[13px]">
+                  <td colSpan={3} className="py-4 px-6 text-right text-[10px] uppercase font-mono tracking-wider text-brand-navy font-bold">
                     Grand Reconciled Sum
                   </td>
-                  <td className="py-4 px-6 text-right font-mono text-blue-700">
+                  <td className="py-4 px-6 text-right font-mono text-brand-navy">
                     {formatPHP(totalDebitSum)}
                   </td>
-                  <td className="py-4 px-6 text-right font-mono text-blue-700">
+                  <td className="py-4 px-6 text-right font-mono text-brand-navy">
                     {formatPHP(totalCreditSum)}
                   </td>
-                  <td className="py-4 px-6 text-right font-mono text-emerald-850">
+                  <td className="py-4 px-6 text-right font-mono text-brand-navy">
                     {formatPHP(Math.abs(totalDebitSum - totalCreditSum))}
                   </td>
                 </tr>

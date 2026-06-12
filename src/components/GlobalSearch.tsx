@@ -67,8 +67,8 @@ export default function GlobalSearch({ onOpenJev }: GlobalSearchProps) {
       
       {/* Title */}
       <div>
-        <h3 className="text-lg font-bold text-slate-900 tracking-tight">Cross-Fund Master Search</h3>
-        <p className="text-xs text-slate-500 font-medium">Global queries across all 5 municipal funds by Payee name, JEV number, Check reference, DV number, or Account code</p>
+        <h3 className="text-2xl font-bold font-serif tracking-tight text-brand-navy">Cross-Fund Master Search</h3>
+        <p className="text-xs text-slate-500 font-semibold font-sans">Global queries across all 5 municipal funds by Payee name, JEV number, Check reference, DV number, or Account code</p>
       </div>
 
       {/* Global input search block */}
@@ -81,23 +81,23 @@ export default function GlobalSearch({ onOpenJev }: GlobalSearchProps) {
             placeholder="Type voucher number, check ID, payee name, or account code (e.g. 1-01-01) then press Enter..."
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            className="w-full bg-white border border-slate-250 py-3.5 pl-12 pr-4 rounded-xl text-xs outline-none focus:border-blue-600 focus:ring-2 focus:ring-blue-100 text-slate-800 shadow-sm"
+            className="w-full bg-white border border-slate-200 py-3.5 pl-12 pr-4 rounded text-xs outline-none focus:border-brand-navy focus:ring-2 focus:ring-brand-navy/10 text-slate-800 shadow-sm"
           />
         </div>
         <button
           id="global-search-submit-btn"
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white font-sans text-xs font-bold px-6 py-2.5 rounded-xl shadow-md transition-all select-none cursor-pointer"
+          className="bg-brand-navy hover:bg-brand-navy/90 text-white font-mono text-[11px] uppercase tracking-wider font-bold px-6 py-2.5 rounded shadow-md transition-all select-none cursor-pointer"
         >
           Execute Search
         </button>
       </form>
 
       {/* Search Output container */}
-      <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-xs">
+      <div className="bg-white border border-slate-200 rounded overflow-hidden shadow-xs">
         {loading ? (
           <div className="py-24 flex flex-col items-center justify-center gap-3">
-            <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-8 h-8 border-3 border-brand-navy border-t-transparent rounded-full animate-spin"></div>
             <p className="text-xs text-slate-400 font-mono font-bold">Querying municipal indexes...</p>
           </div>
         ) : !searched ? (
@@ -117,13 +117,13 @@ export default function GlobalSearch({ onOpenJev }: GlobalSearchProps) {
         ) : (
           <div className="overflow-x-auto">
             <div className="px-6 py-4.5 bg-slate-50 border-b border-slate-150 flex items-center justify-between text-xs text-slate-500">
-              <span>Discovered matches count: <strong className="text-slate-800">{results.length} records</strong></span>
-              <span className="font-semibold text-blue-700 uppercase font-mono text-[9px] tracking-wider">Cross-Fund Ledger scan verified</span>
+              <span>Discovered matches count: <strong className="text-slate-800 font-bold">{results.length} records</strong></span>
+              <span className="font-bold text-brand-navy uppercase font-mono text-[9px] tracking-widest">Cross-Fund Ledger scan verified</span>
             </div>
 
             <table className="w-full text-left text-xs font-sans">
               <thead>
-                <tr className="bg-slate-50 border-b border-slate-200 text-slate-500 font-semibold font-mono text-[10px] uppercase tracking-wider">
+                <tr className="bg-slate-50 border-b border-slate-200 text-brand-navy font-bold font-mono text-[10px] uppercase tracking-wider">
                   <th className="py-3 px-6">Found In Fund</th>
                   <th className="py-3 px-6">Voucher Number</th>
                   <th className="py-3 px-6">Record Date</th>
@@ -137,7 +137,7 @@ export default function GlobalSearch({ onOpenJev }: GlobalSearchProps) {
                   <tr 
                     key={idx}
                     onClick={() => onOpenJev(r.JEV_ID, r.fund)}
-                    className="hover:bg-slate-50/70 cursor-pointer transition-all border-l-2 border-l-transparent hover:border-l-blue-600 group"
+                    className="hover:bg-slate-50/70 cursor-pointer transition-all border-l-2 border-l-transparent hover:border-l-brand-navy group"
                   >
                     <td className="py-3.5 px-6">
                       <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded text-[9px] bg-slate-100 text-slate-700 border border-slate-200 font-bold uppercase tracking-wider">
@@ -145,7 +145,7 @@ export default function GlobalSearch({ onOpenJev }: GlobalSearchProps) {
                         {r.fundName}
                       </span>
                     </td>
-                    <td className="py-3.5 px-6 font-mono text-blue-700 font-extrabold group-hover:underline text-[12px]">
+                    <td className="py-3.5 px-6 font-mono text-brand-navy font-extrabold group-hover:underline text-[12px]">
                       {r.JEV_Number}
                     </td>
                     <td className="py-3.5 px-6 text-slate-505">
@@ -154,7 +154,7 @@ export default function GlobalSearch({ onOpenJev }: GlobalSearchProps) {
                     <td className="py-3.5 px-6">
                       <span className={`inline-flex items-center px-2 py-0.5 rounded text-[10px] font-bold uppercase font-mono ${
                         r.JEV_Type === 'Collection' ? 'bg-emerald-50 text-emerald-700 border border-emerald-100' :
-                        'bg-blue-50 text-blue-700 border border-blue-100'
+                        'bg-slate-100 text-brand-navy border border-slate-250'
                       }`}>
                         {r.JEV_Type}
                       </span>

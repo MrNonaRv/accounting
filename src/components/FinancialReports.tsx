@@ -56,8 +56,8 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
       {/* Control Banner */}
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 print:hidden">
         <div>
-          <h3 className="text-lg font-bold text-slate-900 tracking-tight">Financial Statements & Reports</h3>
-          <p className="text-xs text-slate-500 font-medium font-sans">Official PPSAS-compliant financial reporting templates conforming to Commission on Audit (COA) schemas</p>
+          <h3 className="text-2xl font-bold font-serif tracking-tight text-brand-navy">Financial Statements & Reports</h3>
+          <p className="text-xs text-slate-500 font-semibold font-sans">Official PPSAS-compliant financial reporting templates conforming to Commission on Audit (COA) schemas</p>
         </div>
 
         {/* Buttons and dropdown selectors */}
@@ -67,7 +67,7 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
             id="report-choice-selector"
             value={reportType}
             onChange={(e) => setReportType(e.target.value as ReportType)}
-            className="bg-white border border-slate-250 rounded-lg px-3 py-2 text-xs font-semibold text-slate-700 outline-none cursor-pointer focus:border-blue-500 shadow-xs"
+            className="bg-white border border-slate-200 rounded px-3 py-2 text-xs font-bold text-slate-700 outline-none cursor-pointer focus:border-brand-navy shadow-xs"
           >
             <option value="balance_sheet">Statement of Financial Position (Balance Sheet)</option>
             <option value="income_statement">Statement of Financial Performance (Income Statement)</option>
@@ -79,7 +79,7 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
             id="report-year-selector"
             value={selectedYear}
             onChange={(e) => setSelectedYear(e.target.value)}
-            className="bg-white border border-slate-250 rounded-lg px-3 py-2 text-xs font-semibold text-slate-700 outline-none cursor-pointer focus:border-blue-500 shadow-xs"
+            className="bg-white border border-slate-200 rounded px-3 py-2 text-xs font-bold text-slate-700 outline-none cursor-pointer focus:border-brand-navy shadow-xs"
           >
             <option value="2020">FY 2020</option>
             <option value="2019">FY 2019</option>
@@ -90,7 +90,7 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
           {/* Print button */}
           <button
             onClick={handlePrint}
-            className="flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-sans text-xs font-semibold px-4.5 py-2 rounded-lg shadow-xs select-none cursor-pointer transition-all"
+            className="flex items-center gap-2 bg-brand-navy hover:bg-brand-navy/90 text-white font-mono text-[11px] uppercase tracking-wider font-bold px-4.5 py-2 rounded shadow-xs select-none cursor-pointer transition-all"
           >
             <Printer className="w-4 h-4" />
             Print Report
@@ -99,7 +99,7 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
       </div>
 
       {/* Main Print container wrapper */}
-      <div className="bg-white border border-slate-250 rounded-xl p-8 md:p-12 shadow-sm relative print:border-0 print:p-0">
+      <div className="bg-white border border-slate-200 rounded p-8 md:p-12 shadow-sm relative print:border-0 print:p-0">
         
         {/* Certificate and State Emblem for prints */}
         <div className="text-center font-sans space-y-1 mb-8 pb-6 border-b border-slate-200">
@@ -109,19 +109,19 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
           <p className="text-[10px] text-slate-450 font-mono tracking-wider uppercase font-bold text-slate-500 mt-1">Office of the Municipal Accountant</p>
           
           <div className="pt-4 max-w-sm mx-auto">
-            <span className="inline-block w-2.5 h-2.5 bg-blue-600 rounded-full mr-1.5" />
-            <span className="text-[12px] font-bold text-blue-900 uppercase tracking-wide font-sans">
+            <span className="inline-block w-2.5 h-2.5 bg-brand-navy rounded-full mr-1.5 animate-pulse" />
+            <span className="text-[12px] font-bold text-brand-navy uppercase tracking-wide font-serif">
               {reportType === 'balance_sheet' ? 'Statement of Financial Position' :
                reportType === 'income_statement' ? 'Statement of Financial Performance' :
                'Statement of Cash Flows'}
             </span>
-            <p className="text-[10px] text-slate-450 italic mt-0.5">As of December 31, {selectedYear}</p>
+            <p className="text-[10px] text-slate-500 font-bold font-mono tracking-wider uppercase mt-0.5">As of December 31, {selectedYear}</p>
           </div>
         </div>
 
         {loading ? (
           <div className="py-24 flex flex-col items-center justify-center gap-3">
-            <div className="w-8 h-8 border-3 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+            <div className="w-8 h-8 border-3 border-brand-navy border-t-transparent rounded-full animate-spin"></div>
             <p className="text-xs text-slate-400 font-mono font-bold">Consolidating journal records...</p>
           </div>
         ) : !reportData ? (
@@ -135,7 +135,7 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                 
                 {/* Assets Area */}
                 <div>
-                  <h5 className="font-bold border-b border-slate-300 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-wider text-blue-900">
+                  <h5 className="font-bold border-b border-slate-200 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-widest text-[#002147] font-bold">
                     1.0 Asset Accounts
                   </h5>
                   <div className="divide-y divide-slate-100 font-medium">
@@ -150,15 +150,15 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                     ))}
                     {/* Sum Assets */}
                     <div className="flex justify-between py-3 font-bold border-t border-slate-200 text-slate-900 bg-slate-50 px-3.5 rounded mt-2">
-                      <span className="uppercase text-[10px] tracking-wider font-mono text-slate-600">Total Municipal Assets (A)</span>
-                      <span className="font-mono text-blue-700 text-[13px]">{formatPHP(getGroupSum(reportData.assets))}</span>
+                      <span className="uppercase text-[10px] tracking-widest font-mono text-slate-600 font-bold">Total Municipal Assets (A)</span>
+                      <span className="font-mono text-brand-navy text-[13px] font-extrabold">{formatPHP(getGroupSum(reportData.assets))}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Liabilities Area */}
                 <div>
-                  <h5 className="font-bold border-b border-slate-300 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-wider text-pink-900">
+                  <h5 className="font-bold border-b border-slate-200 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-widest text-[#002147] font-bold">
                     2.0 Liability Accounts
                   </h5>
                   <div className="divide-y divide-slate-100 font-medium">
@@ -173,15 +173,15 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                     ))}
                     {/* Sum Liabilities */}
                     <div className="flex justify-between py-3 font-bold border-t border-slate-200 text-slate-900 bg-slate-50 px-3.5 rounded mt-2">
-                      <span className="uppercase text-[10px] tracking-wider font-mono text-slate-600">Total Municipal Liabilities (B)</span>
-                      <span className="font-mono text-blue-700 text-[13px]">{formatPHP(getGroupSum(reportData.liabilities))}</span>
+                      <span className="uppercase text-[10px] tracking-widest font-mono text-slate-600 font-bold">Total Municipal Liabilities (B)</span>
+                      <span className="font-mono text-brand-navy text-[13px] font-extrabold">{formatPHP(getGroupSum(reportData.liabilities))}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Equity Area */}
                 <div>
-                  <h5 className="font-bold border-b border-slate-300 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-wider text-slate-800">
+                  <h5 className="font-bold border-b border-slate-200 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-widest text-[#002147] font-bold">
                     3.0 Equity Accounts
                   </h5>
                   <div className="divide-y divide-slate-100 font-medium">
@@ -196,17 +196,17 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                     ))}
                     {/* Sum Equity */}
                     <div className="flex justify-between py-3 font-bold border-t border-slate-200 text-slate-900 bg-slate-50 px-3.5 rounded mt-2">
-                      <span className="uppercase text-[10px] tracking-wider font-mono text-slate-600">Total Municipal Equity (C)</span>
-                      <span className="font-mono text-blue-700 text-[13px]">{formatPHP(getGroupSum(reportData.equity))}</span>
+                      <span className="uppercase text-[10px] tracking-widest font-mono text-slate-600 font-bold">Total Municipal Equity (C)</span>
+                      <span className="font-mono text-brand-navy text-[13px] font-extrabold">{formatPHP(getGroupSum(reportData.equity))}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Balancing Verification statement */}
-                <div className="bg-slate-55 bg-slate-900 text-slate-100 p-4 rounded-xl flex items-center justify-between text-xs font-sans">
+                <div className="bg-[#002147] text-white p-4 rounded flex items-center justify-between text-xs font-serif font-bold">
                   <span>PPSAS Accounting Balance Verification [Equation: Assets = Liabilities + Equity]</span>
                   <div className="text-right font-mono text-[13px]">
-                    <span className="font-bold text-emerald-450">Balanced & Certified</span>
+                    <span className="font-bold text-emerald-450 animate-pulse font-bold">Balanced & Certified</span>
                   </div>
                 </div>
 
@@ -219,7 +219,7 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                 
                 {/* Government Revenues */}
                 <div>
-                  <h5 className="font-bold border-b border-slate-300 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-wider text-emerald-900">
+                  <h5 className="font-bold border-b border-slate-200 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-widest text-[#002147] font-bold">
                     Receipts & Operating Revenues
                   </h5>
                   <div className="divide-y divide-slate-100 font-medium text-slate-700">
@@ -227,22 +227,22 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                       <div key={ac.AC_Code} className="flex justify-between py-2 text-[11px]">
                         <span className="text-slate-700 flex gap-2">
                           <code className="text-slate-450 font-mono w-24 text-[10px] shrink-0 font-bold">{ac.AC_Code}</code>
-                          <span className="font-semibold text-slate-800">{ac.Title}</span>
+                          <span className="font-bold text-slate-800">{ac.Title}</span>
                         </span>
-                        <span className="font-mono text-slate-900 font-bold">{formatPHP(ac.Balance)}</span>
+                        <span className="font-mono text-slate-850 font-bold">{formatPHP(ac.Balance)}</span>
                       </div>
                     ))}
                     {/* Sum Revs */}
-                    <div className="flex justify-between py-3 font-bold border-t border-slate-200 text-slate-950 bg-slate-50 px-3.5 rounded mt-2">
-                      <span className="uppercase text-[10px] tracking-wider font-mono text-slate-600">Total Operating Revenues (A)</span>
-                      <span className="font-mono text-emerald-700 text-[13px]">{formatPHP(getGroupSum(reportData.revenue))}</span>
+                    <div className="flex justify-between py-3 font-bold border-t border-slate-200 text-slate-955 bg-slate-50 px-3.5 rounded mt-2">
+                      <span className="uppercase text-[10px] tracking-widest font-mono text-slate-600 font-bold">Total Operating Revenues (A)</span>
+                      <span className="font-mono text-emerald-700 text-[13px] font-extrabold">{formatPHP(getGroupSum(reportData.revenue))}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Operating Expenses */}
                 <div>
-                  <h5 className="font-bold border-b border-slate-300 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-wider text-pink-900">
+                  <h5 className="font-bold border-b border-slate-200 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-widest text-[#002147] font-bold">
                     Administrative & Operating Expenses
                   </h5>
                   <div className="divide-y divide-slate-100 font-medium text-slate-700">
@@ -250,15 +250,15 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                       <div key={ac.AC_Code} className="flex justify-between py-2 text-[11px]">
                         <span className="text-slate-700 flex gap-2">
                           <code className="text-slate-450 font-mono w-24 text-[10px] shrink-0 font-bold">{ac.AC_Code}</code>
-                          <span className="font-semibold text-slate-800">{ac.Title}</span>
+                          <span className="font-bold text-slate-800">{ac.Title}</span>
                         </span>
-                        <span className="font-mono text-slate-900 font-bold">{formatPHP(ac.Balance)}</span>
+                        <span className="font-mono text-slate-850 font-bold">{formatPHP(ac.Balance)}</span>
                       </div>
                     ))}
                     {/* Sum Expenses */}
-                    <div className="flex justify-between py-3 font-bold border-t border-slate-200 text-slate-950 bg-slate-50 px-3.5 rounded mt-2">
-                      <span className="uppercase text-[10px] tracking-wider font-mono text-slate-600">Total Operating Expenditures (B)</span>
-                      <span className="font-mono text-blue-700 text-[13px]">{formatPHP(getGroupSum(reportData.expenses))}</span>
+                    <div className="flex justify-between py-3 font-bold border-t border-slate-200 text-slate-955 bg-slate-50 px-3.5 rounded mt-2">
+                      <span className="uppercase text-[10px] tracking-widest font-mono text-slate-600 font-bold">Total Operating Expenditures (B)</span>
+                      <span className="font-mono text-brand-navy text-[13px] font-extrabold">{formatPHP(getGroupSum(reportData.expenses))}</span>
                     </div>
                   </div>
                 </div>
@@ -269,9 +269,9 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                   const eSum = getGroupSum(reportData.expenses);
                   const surplus = rSum - eSum;
                   return (
-                    <div className="bg-slate-900 text-slate-100 p-4.5 rounded-xl flex items-center justify-between text-xs font-sans mt-8 font-bold">
-                      <span className="uppercase text-[10px] tracking-wider font-mono">Net Operating Surplus for the period (A - B)</span>
-                      <span className="font-mono text-[14px] text-emerald-400">{formatPHP(surplus)}</span>
+                    <div className="bg-brand-navy text-slate-100 p-4.5 rounded flex items-center justify-between text-xs font-serif mt-8 font-extrabold">
+                      <span className="uppercase text-[10px] tracking-widest font-mono font-bold">Net Operating Surplus for the period (A - B)</span>
+                      <span className="font-mono text-[14px] text-emerald-450">{formatPHP(surplus)}</span>
                     </div>
                   );
                 })()}
@@ -285,7 +285,7 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                 
                 {/* Cash inflows */}
                 <div>
-                  <h5 className="font-bold border-b border-slate-300 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-wider text-emerald-930">
+                  <h5 className="font-bold border-b border-slate-200 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-widest text-[#002147] font-bold">
                     1.0 Cash Collections & Inflows
                   </h5>
                   <div className="divide-y divide-slate-100 font-medium text-slate-700">
@@ -293,21 +293,21 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                       <div key={ac.AC_Code} className="flex justify-between py-2 text-[11px]">
                         <span className="text-slate-700 flex gap-2">
                           <code className="text-slate-450 font-mono w-24 text-[10px] shrink-0 font-bold">{ac.AC_Code}</code>
-                          <span className="font-semibold text-slate-800">{ac.Title}</span>
+                          <span className="font-bold text-slate-800">{ac.Title}</span>
                         </span>
-                        <span className="font-mono text-slate-900 font-bold">{formatPHP(ac.Balance)}</span>
+                        <span className="font-mono text-slate-850 font-bold">{formatPHP(ac.Balance)}</span>
                       </div>
                     ))}
                     <div className="flex justify-between py-3 font-bold border-t border-slate-200 text-slate-950 bg-slate-50 px-3.5 rounded mt-2">
-                      <span className="uppercase text-[10px] tracking-wider font-mono text-slate-600">Total Treasury Cash Inflows (A)</span>
-                      <span className="font-mono text-emerald-700 text-[13px]">{formatPHP(getGroupSum(reportData.inflows))}</span>
+                      <span className="uppercase text-[10px] tracking-widest font-mono text-slate-600 font-bold">Total Treasury Cash Inflows (A)</span>
+                      <span className="font-mono text-emerald-700 text-[13px] font-extrabold">{formatPHP(getGroupSum(reportData.inflows))}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Cash outflows */}
                 <div>
-                  <h5 className="font-bold border-b border-slate-300 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-wider text-pink-900">
+                  <h5 className="font-bold border-b border-slate-200 text-slate-900 uppercase text-[11px] pb-1.5 mb-3 font-mono tracking-widest text-[#002147] font-bold">
                     2.0 Cash Payments & Outflows
                   </h5>
                   <div className="divide-y divide-slate-100 font-medium text-slate-700">
@@ -315,14 +315,14 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                       <div key={ac.AC_Code} className="flex justify-between py-2 text-[11px]">
                         <span className="text-slate-700 flex gap-2">
                           <code className="text-slate-450 font-mono w-24 text-[10px] shrink-0 font-bold">{ac.AC_Code}</code>
-                          <span className="font-semibold text-slate-800">{ac.Title}</span>
+                          <span className="font-bold text-slate-800">{ac.Title}</span>
                         </span>
-                        <span className="font-mono text-slate-900 font-bold">{formatPHP(ac.Balance)}</span>
+                        <span className="font-mono text-slate-850 font-bold">{formatPHP(ac.Balance)}</span>
                       </div>
                     ))}
                     <div className="flex justify-between py-3 font-bold border-t border-slate-200 text-slate-950 bg-slate-50 px-3.5 rounded mt-2">
-                      <span className="uppercase text-[10px] tracking-wider font-mono text-slate-600">Total Treasury Cash Outflows (B)</span>
-                      <span className="font-mono text-blue-700 text-[13px]">{formatPHP(getGroupSum(reportData.outflows))}</span>
+                      <span className="uppercase text-[10px] tracking-widest font-mono text-slate-600 font-bold">Total Treasury Cash Outflows (B)</span>
+                      <span className="font-mono text-brand-navy text-[13px] font-extrabold">{formatPHP(getGroupSum(reportData.outflows))}</span>
                     </div>
                   </div>
                 </div>
@@ -333,9 +333,9 @@ export default function FinancialReports({ currentFund }: FinancialReportsProps)
                   const oSum = getGroupSum(reportData.outflows);
                   const cashFlowDiff = iSum - oSum;
                   return (
-                    <div className="bg-slate-900 text-slate-100 p-4.5 rounded-xl flex items-center justify-between text-xs font-sans mt-8 font-bold">
-                      <span className="uppercase text-[10px] tracking-wider font-mono">Net increase / (decrease) in cash balance (A - B)</span>
-                      <span className={`font-mono text-[14px] ${cashFlowDiff >= 0 ? 'text-emerald-400' : 'text-red-400'}`}>
+                    <div className="bg-brand-navy text-slate-100 p-4.5 rounded flex items-center justify-between text-xs font-serif mt-8 font-extrabold">
+                      <span className="uppercase text-[10px] tracking-widest font-mono font-bold">Net increase / (decrease) in cash balance (A - B)</span>
+                      <span className={`font-mono text-[14px] ${cashFlowDiff >= 0 ? 'text-emerald-450' : 'text-rose-400'}`}>
                         {formatPHP(cashFlowDiff)}
                       </span>
                     </div>
