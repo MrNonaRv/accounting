@@ -460,9 +460,9 @@ def run_migration_or_seed():
     mdb_files_present = False
     mdb_mapping = {}
     
-    # Simple check for any files ending in .mdb
+    # Simple check for any files ending in .mdb or .accdb
     for f in os.listdir("."):
-        if f.lower().endswith(".mdb"):
+        if f.lower().endswith(".mdb") or f.lower().endswith(".accdb"):
             mdb_files_present = True
             # Build fund matching based on filename
             f_lower = f.lower()

@@ -11,6 +11,7 @@ import BudgetMonitoring from './components/BudgetMonitoring';
 import TrialBalance from './components/TrialBalance';
 import FinancialReports from './components/FinancialReports';
 import GlobalSearch from './components/GlobalSearch';
+import AccessDbImport from './components/AccessDbImport';
 
 export default function App() {
   const [currentFund, setCurrentFund] = useState<FundId>('general');
@@ -91,6 +92,10 @@ export default function App() {
             <GlobalSearch 
               onOpenJev={(id, fund) => openJevModalFromFund(id, fund)} 
             />
+          )}
+
+          {activeTab === 'import_db' && (
+            <AccessDbImport currentFund={currentFund} />
           )}
         </main>
       </div>

@@ -11,7 +11,8 @@ import {
   Shield, 
   CircleDot, 
   LogOut,
-  Building
+  Building,
+  Database
 } from 'lucide-react';
 import { FundId, FUNDS } from '../types';
 
@@ -40,7 +41,8 @@ export default function Sidebar({
     { id: 'budget', label: 'Budget Monitoring', icon: Coins },
     { id: 'trial', label: 'Trial Balance', icon: Scale },
     { id: 'reports', label: 'Financial Reports', icon: FileSpreadsheet },
-    { id: 'search', label: 'Global Search', icon: Search }
+    { id: 'search', label: 'Global Search', icon: Search },
+    { id: 'import_db', label: 'Access DB Import', icon: Database }
   ];
 
   return (

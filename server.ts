@@ -1,6 +1,8 @@
 import express from 'express';
 import path from 'path';
 import sqlite3 from 'sqlite3';
+import fs from 'fs';
+import { exec } from 'child_process';
 import { createServer as createViteServer } from 'vite';
 import { initializeDatabase } from './src/db_seeder';
 
@@ -48,6 +50,68 @@ async function startServer() {
   }
 
   // --- API ROUTES ---
+
+  // Import Microsoft Access Database (.mdb or .accdb)
+  app.post('/api/import-access-db', async (req, res) => {
+    try {
+      const { fund, filename, base64 } = req.body;
+      if (!fund || !filename || !base64) {
+        return res.status(400).json({ error: "Missing required fields: fund, filename, base64" });
+      }
+
+      const validFunds = ['general', 'sef', 'devfund', 'trust', 'meedo'];
+      if (!validFunds.includes(fund)) {
+        return res.status(400).json({ error: `Invalid fund code: '${fund}'. Must be one of: ${validFunds.join(', ')}` });
+      }
+
+      const ext = path.extname(filename).toLowerCase();
+      if (ext !== '.mdb' && ext !== '.accdb') {
+        return res.status(400).json({ error: "Invalid database file format. Only Microsoft Access (.mdb, .accdb) databases are supported." });
+      }
+
+      // Save file with filename including the fund name to trigger the correct mapping in migrate.py
+      const targetFilename = `import_${fund}${ext}`;
+      const targetPath = path.resolve(process.cwd(), targetFilename);
+
+      // Convert base64 payload to binary and write to file
+      const rawData = Buffer.from(base64, 'base64');
+      fs.writeFileSync(targetPath, rawData);
+      console.log(`Saved uploaded Access DB for fund ${fund} to ${targetPath} (${rawData.length} bytes)`);
+
+      // Run migration tool
+      exec('python3 migrate.py', (error, stdout, stderr) => {
+        // Unlink/cleanup temporary uploaded file
+        try {
+          if (fs.existsSync(targetPath)) {
+            fs.unlinkSync(targetPath);
+            console.log(`Deleted temporary upload file: ${targetFilename}`);
+          }
+        } catch (cleanupErr) {
+          console.error(`Error deleting uploaded database file:`, cleanupErr);
+        }
+
+        if (error) {
+          console.error(`Migration script failed for fund ${fund}:`, error, stderr);
+          return res.status(500).json({
+            success: false,
+            error: stderr || error.message || "Execution of python migration script failed.",
+            log: stdout
+          });
+        }
+
+        console.log(`Successfully completed Access DB migration for fund ${fund}!`);
+        res.json({
+          success: true,
+          message: `Microsoft Access Database '${filename}' has been successfully uploaded, parsed, and converted. All ledgers, accounts registry, and responsibility centers on fund ${fund.toUpperCase()} are synchronized and updated.`,
+          log: stdout
+        });
+      });
+
+    } catch (err: any) {
+      console.error(`Failed to handle Access DB import request:`, err);
+      res.status(500).json({ error: err.message });
+    }
+  });
 
   // 1. Config / Metadata (LGU officers)
   app.get('/api/config', async (req, res) => {
